@@ -1,0 +1,16 @@
+.etiqueta {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    padding-bottom: 3px;
+  }
+  
+  .etiqueta.clicked {
+    opacity: .9;
+    border-bottom: 3px solid #fff;
+  }
+  
+  .etiqueta.clicked img {
+    filter: brightness(80%);
+  }
+

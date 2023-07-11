@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en" id="asesoria">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<!--  -->
+<!---->
+<style>
+  .item_delete{
+    z-index: 10;
+    font-size: 1.7rem;
+    color: #000;
+  }
+
+
+
+  .item_delete:hover{
+    color: red;
+  }
+
+  #tablePlantillas{
+    margin-bottom: 30px !important;
+  }
+</style>
+    <title>Asesoria</title>
+    <link rel="stylesheet" type="text/css" href="./css/var1.css" />
+
+    <!-- jquery       -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+    <!-- link de bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+
+    <!-- sweetalert2 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.min.css"
+    />
+
+    <!-- Iconos de bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+
+    <!-- Multi-Select -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"
+      integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Table Bootstrap -->
+    <link
+      href="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Iconos de bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
+
+    <link rel="shortcut icon" type="image/jpg" href="./images/whatsapp.png" />
+  </head>
+
+  <body
+    class="table-dia"
+    id="body2"
+    style="background-image: url(/images/background.png)"
+  >
+    <!--Header-->
+    <nav><%- include("./partials/header.ejs") %></nav>
+    <!-- Contenido de la pagina -->
+    <div class="container-fluid overflow-x-hidden">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-12 mx-auto">
+          <!--nav-tabs-->
+          <ul
+            class="nav nav-tabs"
+            id="myTab"
+            role="tablist"
+            style="margin-left: 16px; padding-top: 25px"
+          >
+            <li class="nav-item" id="melosss">
+              <button
+                style="color: #00a884; border-radius: 7px; font-size: 16px"
+                class="nav-link active melos btn-rounded"
+                id="Asesores-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#Asesores"
+                type="button"
+                role="tab"
+                aria-controls="Asesores"
+                aria-selected="true"
+              >
+                <i class="fas fa-users m-1"></i> Asesores
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                style="color: #00a884; border-radius: 7px; font-size: 16px"
+                class="nav-link btn-rounded"
+                id="Lineas-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#Lineas"
+                type="button"
+                role="tab"
+                aria-controls="Lineas"
+                aria-selected="false"
+              >
+                <i class="fa-sharp fa-solid fa-phone m-1"></i> Líneas
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                style="color: #00a884; border-radius: 7px; font-size: 16px"
+                class="nav-link btn-rounded"
+                id="plantillas-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#plantillas"
+                type="button"
+                role="tab"
+                aria-controls="plantillas"
+                aria-selected="false"
+              >
+                <i class="bi bi-file-text-fill"></i> Plantillas
+              </button>
+            </li>
+          </ul>
+
+          <!-- Contenido del tab -->
+          <div class="tab-content" id="myTabContent">
+            <!-- Ususarios -->
+            <!-- ----------------------------------------------------------------------- -->
+            <div
+              class="tab-pane fade show active"
+              id="Asesores"
+              role="tabpanel"
+              aria-labelledby="Asesores-tab"
+            >
+              <div class="container-fluid mt-3" id="cont_pagos" x>
+                <div class="float-right">
+                  <!-- Boton de crear -->
+                  <button
+                    id="btnNuevoAsesor"
+                    type="button"
+                    class="btn btn-primary d-flex mt-2"
+                    data-toggle="modal"
+                    data-target="#nuevo"
+                    value=""
+                    style="background-color: #00a884; border: none"
+                  >
+                    <i class="fas fa-plus m-1"></i>Nuevo
+                  </button>
+                </div>
+
+                <!-- Modal usuarios -->
+                <%- include('./partials/modalUsuarios.ejs') %>
+
+                <!-- Tabla usuarios -->
+                <div>
+                  <table
+                    data-page-size="7"
+                    data-search="true"
+                    data-search-align="left"
+                    data-pagination="false"
+                    class="table table-rounded"
+                    id="tableAsesores"
+                    style="
+                      background-color: #ffffff;
+                      margin-top: 17px;
+                      color: #747777;
+                      font-size: 15px;
+                    "
+                  >
+
+                  
+                  <script src="../js/dataTemplate.js"></script>
+
+                  
+                  
+                  <!-- <thead
+                      class="bg-dark text-white sticky-top"
+                      style="
+                        background-color: #f7f7f7 !important;
+                        border-radius: 10px !important;
+                        color: #747777 !important;
+                      "
+                    >
+                  
+                  </thead> -->
+
+                    <thead
+                      class="bg-dark text-white sticky-top"
+                      style="
+                        background-color: #f7f7f7 !important;
+                        border-radius: 10px !important;
+                        color: #747777 !important;
+                      "
+                    >
+                      <tr>
+                        <th
+                          data-field="estadoAse"
+                          data-formatter="estadosRow"
+                          class="text-center"
+                          data-sortable="true"
+                        >
+                          Estado
+                        </th>
+                        <th data-field="nameAse" data-sortable="true">
+                          Nombre
+                        </th>
+                        <th data-field="IdZohoAse" data-sortable="true">
+                          Conversaciones activas
+                        </th>
+                        <th
+                          data-field="operate"
+                          data-formatter="accionesAsesor"
+                          data-events="operateEvents"
+                          class="text-center"
+                        >
+                          Acciones
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <div id="paginationControls" class="text-center mt-3">
+                    <button
+                      id="prevPageBtn"
+                      class="btn"
+                      style="background-color: #00a884; color: #ffffff"
+                    >
+                      &lt; Anterior
+                    </button>
+                    <span id="currentPage" class="mr-2">Página 1 de 1</span>
+                    <button
+                      id="nextPageBtn"
+                      class="btn"
+                      style="background-color: #00a884; color: #ffffff"
+                    >
+                    Siguiente &gt;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-------------------------------------------------------------------------------------------->
+            <!--- Lineas -->
+            <div
+              class="tab-pane fade"
+              id="Lineas"
+              role="tabpanel"
+              aria-labelledby="Lineas-tab"
+            >
+              <div class="container-fluid mt-2" id="cont_pagos">
+                <div class="float-right">
+                  <!-- Boton de crear -->
+                  <button
+                    id="btnNuevoCelular"
+                    type="button"
+                    class="btn btn-primary d-flex mt-4"
+                    data-toggle="modal"
+                    data-target="#celular"
+                    style="background-color: #00a884; border: none"
+                  >
+                    <i class="fas fa-plus m-1"></i>Nuevo
+                  </button>
+                </div>
+                <br />
+                <!-- Modal  Celulares -->
+                <%- include('./partials/modalLineas.ejs') %>
+
+                <!-- Tabla Celulares -->
+                <table
+                  data-page-size="7"
+                  data-search="true"
+                  data-search-align="left"
+                  data-pagination="false"
+                  class="table"
+                  id="tableLineas"
+                  style="
+                    background-color: #ffffff;
+                    color: #747777;
+                    font-size: 15px;
+                  "
+                >
+                  <thead
+                    class="bg-dark text-white sticky-top"
+                    style="
+                      background-color: #f7f7f7 !important;
+                      color: #747777 !important;
+                    "
+                  >
+                    <tr>
+                      <th
+                        data-field="estadoLinea"
+                        data-formatter="estadosRow"
+                        class="text-center"
+                      >
+                        Estado
+                      </th>
+                      <th data-field="nameLinea">Nombre</th>
+                      <th data-field="numeroLinea">Numero de celular</th>
+                      <th data-field="idLinea">ID de celular</th>
+                      <th
+                        data-field="operate"
+                        data-formatter="accionesLinea"
+                        data-events="operateEvents"
+                        class="text-center"
+                      >
+                        Acciones
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+
+            <!--------------------------------------------------------------------------------------------->
+            <!--- Plantillas -->
+            <div
+              class="tab-pane fade"
+              id="plantillas"
+              role="tabpanel"
+              aria-labelledby="plantillas-tab"
+            >
+              <div class="container-fluid mt-2" id="cont_pagos">
+                <div class="float-right">
+                  <!-- Boton de crear -->
+                  <button
+                    type="button"
+                    class="btn btn-primary d-flex mt-4"
+                    data-toggle="modal"
+                    data-target="#plantilla"
+                    style="background-color: #00a884; border: none"
+                  >
+                    <i class="fas fa-plus m-1"></i>Nuevo
+                  </button>
+                </div>
+                <br />
+
+                <!-- Modal  plantilla -->
+                <%- include('./partials/modalPlantilla.ejs') %>
+
+                <!-- Tabla plantillas -->
+                
+                <script src="../js/dataTemplate.js" type="module" defer>
+                  // console.log(obtenerTemplates)
+                  // console.log(eliminarTemplate)
+                </script>
+                
+              <div id="paginationControls" class="text-center mt-3">
+                  <button
+                    id="prevPageBtn1"
+                    class="btn"
+                    style="background-color: #00a884; color: #ffffff"
+                  >
+                    &lt; Anterior
+                  </button>
+                  <span id="currentPage1" class="mr-2">Página 1 de <span id="nextPageBtn1"></span></span>
+                  <button
+                    id="nextPageBtn1"
+                    class="btn"
+                    style="background-color: #00a884; color: #ffffff"
+                  >
+                   Siguiente &gt;
+                  </button>
+                </div>
+                <table
+                  data-page-size="7"
+                  data-search="true"
+                  data-search-align="left"
+                  data-pagination="false"
+                  class="table"
+                  id="tablePlantillas"
+                  style="
+                    background-color: #ffffff;
+                    color: #747777;
+                    font-size: 15px;
+                  "
+                >
+                  <thead
+                    class="bg-dark text-white sticky-top"
+                    style="
+                      background-color: #f7f7f7 !important;
+                      color: #747777 !important;
+                    "
+                  >
+                    <tr>
+                      <th
+                        data-field="estadoTemplate"
+                        data-formatter="estadosRow"
+                        class="text-center"
+                      >
+                        Estado
+                      </th>
+                      <th data-field="nameTemplate">Nombre</th>
+                      <th
+                        data-field="tipoTemplate"
+                        data-formatter="tipoTemplate"
+                      >
+                        Tipo
+                      </th>
+                      <th
+                        data-field="operate"
+                        data-formatter="accionesPlantilla"
+                        data-events="operateEvents"
+                        class="text-center"
+                      >
+                        Texto Plantilla
+                      </th>
+
+                      <th
+                        data-field="operate"
+                        class="text-center pruebas"
+                        data-formatter="trash"
+                        onclick=""
+                      >
+                        Eliminar Plantilla
+                      </th>
+
+                      <th
+                      data-field="operate"
+                      >
+                        Categoria Usuario
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          const pruebas = document.querySelectorAll('.item_delete')
+
+          pruebas.forEach(prueba => {
+            prueba.addEventListener('click', () => {
+              console.log(prueba.id)
+            })
+          })
+        </script>
+        <!----------------------------------- Segunda mitad ------------------------------------------------------------------->
+        <!-- Tiempo para cierre del chat-->
+        <div
+          class="col-lg-6 col-md-8 col-sm-12 mx-auto"
+          style="padding-top: 83px; z-index: -10;"
+        >
+          <div
+            class="row justify-content-start pr-4"
+            style="padding-top: 4px; margin-left: 2px"
+          >
+            <button
+              type="button"
+              class="btn btn-primary col-md-4"
+              data-toggle="modal"
+              data-target="#editar"
+              style="background-color: #00a884; border: none; font-size: 15px"
+            >
+              Conversaciones activas por asesor
+            </button>
+
+            <!-- Modal Tiempo para cierre del chat -->
+            <%- include('./partials/modalTiempo.ejs') %>
+          </div>
+          <!--Tabla configuracion -->
+          <!-- <div class="mt-4" style="padding-top: 10px; border: none">
+            <table
+              class="table"
+              id="tableHorarios"
+              style="background-color: #ffffff; color: #747777; font-size: 15px"
+            >
+              <thead class="ttbody"
+                class="bg-dark text-white"
+                style="
+                  background-color: #f7f7f7 !important;
+                  color: #747777 !important;
+                "
+              >
+                <tr>
+                  <th
+                    data-field="estadoHorari"
+                    data-formatter="estadosRow"
+                    class="text-center"
+                  >
+                    Estado
+                  </th>
+                  <th data-field="diaHorari">Cliente</th>
+                  <th data-field="inicioHorari">Hora inicio</th>
+                  <th data-field="finHorari">Hora actual</th>
+                  <th
+                    data-field="operate"
+                    data-formatter="accionesHorario"
+                    data-events="operateEvents"
+                    class="text-center"
+                  >
+                    Acciones
+                  </th>
+                </tr>
+              </thead> 
+            </table>
+          </div> -->
+          <!-- Modal configuarción hora -->
+          <%- include('./partials/modalConfiguraciónHora.ejs') %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script de bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Table Boostrap -->
+    <script src="https://unpkg.com/bootstrap-table@1.21.2/dist/bootstrap-table.min.js"></script>
+
+    <!-- Multi-Select -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"
+      integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Configuraciones y funciones -->
+    <script src="../js/configFunctions.js"></script>
+    <script src="../js/alerts.js"></script>
+  </body>
+ 
+  <script>
+    async function obtenerTemplates() {
+  try {
+    const config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://zjj9v6.api.infobip.com/whatsapp/2/senders/573232326930/templates',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Basic TUFHSU5FLkNYOmdDUEouOUhyNDNZaiN2Rw=='
+      },
+      data: data
+    };
+
+    const response = await axios.request(config);
+    respuesta  =  await response.data.templates;
+    // window.ress = respuesta
+  } catch (error) {
+    console.log(error);
+  }
+
+  return respuesta
+}
+  </script>
+
+
+  <script>
+     document.addEventListener("DOMContentLoaded", async function () {
+      // Variables para la paginación
+      var currentPage1 = 0;
+      var rowsPerPage1 = 20;
+      // const totalFilas = $("#tablePlantillas tbody tr")
+      const data = await obtenerTemplates()
+      console.log(data);
+      var totalRows1 = data.length;
+      
+      
+      var totalPages1 = Math.ceil(totalRows1 / rowsPerPage1);
+      
+      function showPage1(page) {
+        var startIndex1 = page * rowsPerPage1;
+        var endIndex1 = startIndex1 + rowsPerPage1;
+        
+
+        $("#tablePlantillas tbody tr").hide().slice(startIndex1, endIndex1).show();
+        $("#currentPage1").text("Página " + (page + 1) + " de " + totalPages1);
+
+        $("#prevPageBtn1").prop("disabled", page === 0);
+
+        $("#nextPageBtn1").prop("disabled", page === totalPages1 - 1);
+      }
+      
+      window.currentPage2 = currentPage1;
+      window.showPages = showPage1
+
+      showPage1(currentPage1);
+      $("#prevPageBtn1").click(function () {
+        currentPage1--;
+        showPage1(currentPage1);
+      });
+
+      $("#nextPageBtn1").click(function () {
+        currentPage1++;
+        showPage1(currentPage1);
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      // Variables para la paginación
+      var currentPage = 0;
+      var rowsPerPage = 10;
+      const totalFilas = $("#tableAsesores tbody tr")
+      
+      var totalRows = $("#tableAsesores tbody tr").length;
+
+      var totalPages = Math.ceil(totalRows / rowsPerPage);
+
+      function showPage(page) {
+        var startIndex = page * rowsPerPage;
+        var endIndex = startIndex + rowsPerPage;
+
+        $("#tableAsesores tbody tr").hide().slice(startIndex, endIndex).show();
+        $("#currentPage").text("Página " + (page + 1) + " de " + totalPages);
+
+        $("#prevPageBtn").prop("disabled", page === 0);
+
+        $("#nextPageBtn").prop("disabled", page === totalPages - 1);
+      }
+
+      showPage(currentPage);
+
+      $("#prevPageBtn").click(function () {
+        currentPage--;
+        showPage(currentPage);
+      });
+
+      $("#nextPageBtn").click(function () {
+        currentPage++;
+        showPage(currentPage);
+      });
+    });
+  </script>
+
+  <script>
+    let input = document.querySelector(".input");
+    let button = document.querySelector(".button");
+    // button.disabled = true;
+    // input.addEventListener("change", stateHandle);
+
+    // function stateHandle() {
+    //   if (document.querySelector(".input").value === "") {
+    //     button.disabled = true;
+    //   } else {
+    //     button.disabled = false;
+    //   }
+    // }
+
+    function selectOption() {
+      // Obtener el elemento select
+      var select = document.getElementById("tipo");
+
+      // Obtener el valor seleccionado
+      var valorSeleccionado = select.value;
+
+      // Hacer algo con el valor seleccionado
+      console.log("El usuario seleccionó la opción " + valorSeleccionado);
+
+      if (valorSeleccionado == 2) {
+        document.getElementById("file").classList = "d-block";
+        document.getElementById("floatingTextarea2").classList = "d-none";
+        document.getElementById("mensaje").classList = "d-none";
+      } else {
+        document.getElementById("floatingTextarea2").classList = "form-control";
+        document.getElementById("mensaje").classList = "form-control";
+        document.getElementById("file").classList = "d-none";
+      }
+    }
+  </script>
+
+  <script>
+    function editarFila(btnEditar) {
+      // Obtén el elemento select por su ID
+      let select = document.getElementById("estado");
+      // Obtener el elemento td
+      var success = document.getElementById("success");
+      var danger = document.getElementById("danger");
+      var warning = document.getElementById('warning')
+      // Obtener el elemento i con clase "text-success" y id "success"
+      var iElement = document.querySelector("td i.text-success#success");
+
+      // Obtén el valor seleccionado
+      //var valorSeleccionado = select.value;
+
+      // Obtener la fila de la tabla que contiene los datos del usuario
+      let fila = btnEditar.closest("tr");
+      // Obtener los valores de las celdas de la fila
+      let estado = fila.cells[0];
+      let id = fila.cells[1].textContent;
+      let usuarios = fila.cells[2].textContent;
+      let linea = fila.cells[3];
+
+      // Copiar los valores en los campos del formulario
+      document.getElementById("nombre").value = usuarios;
+      document.getElementById("id").value = id;
+      document.getElementById("estado").value = estado;
+      document.getElementById("estado").value = estado;
+      document.getElementById("asesores").value = asesores;
+      document.getElementById("linea").value = usuarios;
+      document.getElementById("id_linea").value = id;
+      document.getElementById("id_linea").value = id;
+      console.log(estado);
+      console.log(iElement);
+    }
+
+    function editarFilas(btnEditar) {
+      // Obtener la fila de la tabla que contiene los datos del usuario
+      let fila = btnEditar.closest("tr");
+      // Obtener los valores de las celdas de la fila
+      let estado = fila.cells[0];
+      let api = fila.cells[1].textContent;
+      let nombre = fila.cells[2].textContent;
+      let tipo = fila.cells[3];
+      let mensaje = fila.cells[4].textContent;
+      console.log(mensaje);
+
+      // Copiar los valores en los campos del formulario
+      document.getElementById("estado").value = estado;
+      document.getElementById("API").value = api;
+      document.getElementById("nombrePlantilla").value = nombre;
+      document.getElementById("tipo").value = tipo;
+      document.getElementById("floatingTextarea2").value = mensaje;
+    }
+  </script>
+
+  
+  
+</html>

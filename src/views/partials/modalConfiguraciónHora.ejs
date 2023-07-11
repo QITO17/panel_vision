@@ -1,0 +1,47 @@
+<% dataHorario.forEach(horario=> { %>
+    <div class="modal fade" id="editarTabla" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/update" method="POST">
+                        <input id="id" name="id" value="<%= horario.id %>" hidden>
+                        <div class="mb-3">
+                            <label for="inicio" class="form-label">Inicio</label>
+                            <input type="text" class="form-control" id="wpp_inicio" name="wpp_inico"
+                                tabindex="1" value="<%= horario.wpp_inico %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fin" class="form-label">Fin</label>
+                            <input type="text" class="form-control" id="wpp_fin" name="wpp_fin"
+                                tabindex="2" value="<%= horario.wpp_fin %>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="descanso" class="form-label">Descanso</label>
+                            <input type="text" class="form-control" id="wpp_hora_descanso"
+                                name="wpp_hora_descanso" tabindex="2"
+                                value="<%= horario.wpp_hora_descanso %>" %>">
+                        </div>
+                        <label for="rol" class="form-label">Habilitar/Deshabilitar dia</label>
+                        <select id="des" name="des" class="form-select" tabindex="3">
+                            <option <%=horario.wpp_desabilitado=='Habilitar' ? "selected" : '' %>
+                                value="Habilitar">Habilitar</option>
+                            <option <%=horario.wpp_desabilitado=='Deshabilitar' ? "selected" : '' %>
+                                value="Deshabilitar">Deshabilitar</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="modal-footer" style="padding-right: 31%;">
+                    <button type="submit" class="btn" style="background-color: #00a884; color:white;">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }) %>

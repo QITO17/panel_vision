@@ -1,0 +1,205 @@
+<link rel="stylesheet" href="../../css/newStyles.css" />
+<div class="d-flex flex-row align-items-center header">
+  <% if (page == 'index') { %>
+  <a href="/"
+    ><img
+      src="/images/whatsapp.png"
+      alt="profile photo"
+      class="img-fluid mr-2"
+      style="height: 40px; margin: 4px"
+      data-bs="collapse"
+      aria-expanded="false"
+      aria-controls="collapseWidth"
+      id="index"
+  /></a>
+  <% } else { %>
+  <a href="/"
+    ><img
+      src="/images/whatsapp.png"
+      alt="profile photo"
+      class="img-fluid mr-2"
+      style="height: 40px; margin: 4px"
+      data-bs="collapse"
+      aria-expanded="false"
+      aria-controls="collapseWidth"
+      id="index"
+  /></a>
+  <% } %>
+  <!-- <p style="color: #ffffff; margin-top: 13px; padding-right: 60px; font-size: 15px; margin-top: 25px;">ASESOR</p> -->
+  <div
+    class="chat-header-right r ms-auto d-flex justify-content-end align-items-end p-2"
+  >
+    <a href="/info">
+      <img
+        class="etiqueta"
+        onclick="cambiarEstilo(1)"
+        src="/images/Customer.png"
+        height="10px"
+        name="Historial"
+        style="margin-right: 3px"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+    >
+      <img
+        class="etiqueta"
+        onclick="cambiarEstilo(2)"
+        src="/images/Asesor.png"
+        alt=""
+      />
+    </button>
+    <a href="/config">
+      <img
+        class="etiqueta"
+        onclick="cambiarEstilo(3)"
+        src="/images/Supervisor.png"
+        alt=""
+        style="margin-left: 3px"
+      />
+    </a>
+  </div>
+
+  
+  
+  <script>
+    function handleMessage(event) {
+      if (event.data.action === 'changeURL') {
+        window.location.href = event.data.url;
+      }
+    }
+
+    window.addEventListener('message', handleMessage);
+  </script>
+
+  <div id="collapseWidth" style="padding-right: 20px">
+    <div class="search-container" style="background-color: #e4ddd5">
+      <select
+        style="background-color: #e4ddd5; color: gray"
+        id="selectLineas"
+        class="search-input form-select"
+        aria-label="Default select example"
+      >
+        <option value="" disabled selected hidden>Negocio</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- panel derecho asesores -->
+<div class="chat-header-right">
+  <div
+    class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="offcanvasNavbar"
+    aria-labelledby="offcanvasLabel"
+    style="border-bottom-left-radius: 10px; border-top-left-radius: 10px"
+  >
+    <nav style="background-color: #00a884; border-top-left-radius: 10px">
+      <div class="offcanvas-header text-center">
+        <h4
+          style="color: #ffffff"
+          class="offcanvas-title"
+          id="offcanvasNavbarLabel"
+        >
+          Asesores
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+          style="color: #ffffff"
+        ></button>
+      </div>
+    </nav>
+
+    <div class="offcanvas-body">
+      <!-- Asesores activos -->
+      <div class="container">
+        <center>
+          <h4 class="mt-2" style="color: #949393">Activos</h4>
+        </center>
+        <br />
+        <% users.forEach((user)=>{ %> <% if(user.Isonline == true){ %>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-7">
+            <p><%= user.full_name %></p>
+          </div>
+          <div class="col-2">
+            <img
+              src="./images/activo.png"
+              alt=""
+              style="width: 15px; height: 15px; opacity: 2"
+            />
+          </div>
+        </div>
+
+        <% } %> <% }) %>
+      </div>
+
+      <!-- Asesores Inactivos -->
+      <div class="container">
+        <center>
+          <h4 class="mt-3" style="color: #949393">Inactivos</h4>
+        </center>
+        <br />
+        <% users.forEach((user)=>{ %> <% if(user.Isonline == false){ %>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-7">
+            <p><%= user.full_name %></p>
+          </div>
+          <div class="col-2">
+            <img
+              src="./images/inactivo.png"
+              alt="Ciruculo rojo "
+              style="width: 15px; height: 15px; opacity: 2"
+            />
+          </div>
+        </div>
+
+        <% } %> <% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function cambiarEstilo(etiquetaSeleccionada) {
+    const etiquetas = document.getElementsByClassName("etiqueta");
+
+    for (let i = 0; i < etiquetas.length; i++) {
+      if (i + 1 === etiquetaSeleccionada) {
+        etiquetas[i].classList.add("clicked");
+      } else {
+        etiquetas[i].classList.remove("clicked");
+      }
+    }
+  }
+
+  (async () => {
+    let Chats = await fetch("/index/lineas/1");
+    Chats = JSON.parse(await Chats.text());
+
+    const options = Chats.map((dato) => ({
+      value: `{"idCelular": ${dato.id_celular}, "numeroCelular": "${dato.numero_celular}", "idNumeroCelular": "${dato.id_numero_celular}" }`,
+      label: dato.nombre_celular,
+    }));
+
+    var selectElement = $("#selectLineas");
+    $.each(options, function (index, option) {
+      var optionElement = $("<option>")
+        .attr("value", option.value)
+        .text(option.label);
+      selectElement.append(optionElement);
+    });
+  })();
+</script>

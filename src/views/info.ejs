@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-***" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://live.zwidgets.com/js-sdk/1.0.5/ZohoEmbededAppSDK.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./dist/css/bootstrap-msg.css" />
+    <link rel="stylesheet" type="text/css" href="./css/var.css" />
+
+
+    <!-- DATA TABLE JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
+    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.27/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/jpg" href="./images/whatsapp.png" />
+    <title>Historial</title>
+    <style>
+    
+
+    
+    </style>
+</head>
+
+<body>
+    <nav> 
+      <%- include('./partials/header.ejs') %> 
+    </nav>
+    <div class="card" style="background-color: #f7f7f7;">
+
+        <div class="card-body" >
+        </br>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; ">
+          <div style="width: 100%; max-height: 85vh; overflow: auto; margin-bottom: 150px; box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2); ">
+            <table class="table table-bordered table-hover" id="panel_hist" style="border: none;">
+              <thead style="background-color: #00a884!important; color: #fff; font-size: medium;">
+                <tr>
+                  <th style="border: none; padding-left: 10px;">Línea</th>
+                  <th style="border: none; padding-left: 10px;">Nombre</th>
+                  <th style="border: none; padding-left: 10px;">Estado</th>
+                  <th style="border: none; padding-left: 10px;">Tiempo de creación</th>
+                  <th style="border: none; padding-left: 10px;">Tipo</th>
+                </tr>
+              </thead>
+              <tbody style="font-size: 15px;">
+                <% clientes.forEach((cliente, index) => {
+                if (index % 2 === 0) { %>
+                <tr style="background-color: #e5e6e8; color: #747777;">
+                  <% } else { %>
+                  <tr style="background-color: #f7f7f7;; color: #747777;">
+                    <% } %>
+                    <td style="border: none; padding-left: 10px;">
+                      <img src="./images/whatsapp.png" alt="WhatsApp" style="width: 20px; height: 20px;">
+                      <%= cliente.wpp_numero %>
+                    </td>
+                    <td style="border: none; padding-right: 40px;">
+                      <a style="color: #00a884; text-decoration: none;" href="https://crm.zoho.com/crm/org745126307/tab/Leads/<%= cliente.wpp_zoho_id %>" target="_blank">
+                        <%= cliente.wpp_nombre %>
+                      </a>
+                    </td>
+                    <td style="border: none; "><%= cliente.wpp_estado %></td>
+                    <td style="border: none; "><%= cliente.wpp_fecha_hora_creacion %></td>
+                    <td style="border: none; "><%= cliente.wpp_cli_tipo %></td>
+                  </tr>
+                  <% }) %>
+              </tbody>
+            </table>
+            
+          </div>
+          
+          
+      </div>
+      
+      
+        
+        </div>
+     </div>
+     
+</body>
+</html>
+  
+
+<script>
+
+  $(document).ready(function() {
+    var table = $('#panel_hist').DataTable( {
+        rowReorder: true,
+        pageLength: 15,
+        aLengthMenu: [[15, 30, 100, -1], [15, 30, 100, "All"]],
+        dom: 'Bfrtip',
+        buttons: [
+          'excelHtml5',
+          'csvHtml5',
+          'pdfHtml5'
+        ],
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+          }
+        },
+        order: [[6, 'desc']],
+        columnDefs: [
+          { orderable: true, targets: '_all' }
+        ]
+    } );
+  } );
+
+</script>
+
+
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>

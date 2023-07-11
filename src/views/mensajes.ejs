@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+      integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/styles2.css" />
+
+    <link rel="shortcut icon" type="image/jpg" href="./images/whatsapp.png" />
+    <!-- <link rel="stylesheet" href="../css/newStyles.css" /> -->
+    <style></style>
+    <title>WhatsApp</title>
+  </head>
+
+  <body class="d-flex" id="body">
+    <input type="hidden" name="nombre_asesor" id="nombre_asesor" />
+
+    <!-- Message Area -->
+    <div class="d-none d-flex flex-column header" id="Message-area">
+      <div class="w-100 overlay"></div>
+
+      <!-- Header -->
+      <div
+        class="row d-flex flex-row m-0 w-100"
+        id="navbar"
+        style="padding: 0px 0px 0px 0px; height: 63px"
+      >
+        <span>
+          <a href="#"
+            ><img
+              src="/images/profile.jpg"
+              alt="profile photo"
+              class="img-fluid rounded-circle mr-2 ml-2"
+              style="height: 50px; margin: 5px"
+              id="pic"
+          /></a>
+        </span>
+
+        <div class="d-flex flex-column chat_header">
+          <div class="text-black" id="name" style="padding: 12px 0px 0px 0px">
+            <% console.log(Messages[0].wpp_nombre); %> <%=
+            Messages[0].wpp_nombre %>
+            <br />
+            <%= Messages[0].wpp_numero %>
+
+            <!--<div class="text-black small">online</div>-->
+          </div>
+        </div>
+        <div style="padding: 15px">
+          <span>
+            <a href="">
+              <button
+                type="button"
+                class="btn btn-success"
+                aria-expanded="false"
+                aria-controls="collapseWidth"
+                id="botonCerrarCon"
+                onclick="redirecioname()"
+              >
+                Cerrar conversación
+              </button>
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <script>
+        const redirecioname = () => {
+          event.preventDefault();
+          window.top.location.href = "/";
+        };
+      </script>
+
+      <!-- Messages -->
+      <div
+        class="d-flex flex-column message-content container-fluid"
+        id="contentMessage"
+      >
+        <div class="body m-1 mr-2">
+          <div class="d-flex flex-column" id="messages">
+            <% const fechas = Messages.map(mensaje => mensaje.wpp_fecha); let
+            fechasSin = new Set(fechas); fechasSin = [...fechasSin]; %> <%
+            Messages.forEach((wpp) => { %> <% let fecha = wpp.wpp_fecha; let
+            hora = wpp.wpp_hora; let fechaIndex = fechasSin.indexOf(fecha); if
+            (fechaIndex !== -1) { let out = fechasSin.splice(fechaIndex, 1)[0];
+            %>
+
+            <div class="mx-auto my-2 bg-date small py-1 rounded">
+              <p style="margin: 5px"><%= out %></p>
+            </div>
+
+            <% } %>
+
+            <input type="hidden" id="numero" value="<%= wpp.wpp_numero %>" />
+
+            <% if (wpp.wpp_id_asesor == null) { %>
+            <!--<div class="align-self-end self p-1 my-1 mx-3 rounded bg-white shadow-sm message-item">
+                        </div>-->
+            <div
+              class="align-self-start p-1 my-1 mx-3 rounded bg-white shadow-sm message-item"
+            >
+              <div class="d-flex flex-row">
+                <div class="body m-1 mr-2">
+                  <p><%- wpp.wpp_mensajes.replace(/\n/g, '<br />') %></p>
+                </div>
+                <div
+                  class="time ml-auto small text-right flex-shrink-0 align-self-end text-muted"
+                  style="width: 35px"
+                >
+                  <span class="chat-timestamp"> <%= hora %> </span>
+                </div>
+              </div>
+            </div>
+            <% } else { %>
+            <div
+              class="align-self-end self p-1 my-1 mx-1 mx-3 rounded bg-white shadow-sm message-item"
+            >
+              <div class="d-flex flex-row">
+                <div class="body m-1 mr-2">
+                  <p><%- wpp.wpp_mensajes.replace(/\n/g, '<br />') %></p>
+                </div>
+                <div
+                  class="time ml-auto small flex-shrink-0 align-self-end text-muted d-flex"
+                  style="width: 41px"
+                >
+                  <span class="chat-timestamp"> <%= hora %> </span>
+                  <span
+                    data-testid="msg-dblcheck"
+                    aria-label="Leído"
+                    data-icon="msg-dblcheck"
+                    class="_3l4_3"
+                  >
+                    <svg
+                      viewBox="0 0 16 15"
+                      width="16"
+                      height="15"
+                      style="padding-left: 2px"
+                    >
+                      <path
+                        fill="#0095FF"
+                        d="m15.01 3.316-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <% } %> <% }) %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audio -->
+      <div class="card justify-self-end align-items-center flex-row d-none">
+        <div class="card-body">
+          <p id="duracion"></p>
+        </div>
+        <i class="fas fa-paper-plane px-3" id="send" onclick="stopTime()"></i>
+        <i class="fas fa-trash-can px-3" id="pause" onclick="stopTime()"></i>
+      </div>
+
+      <!-- Archivos -->
+      <div
+        class="card justify-self-end align-items-center flex-row d-none"
+        id="files"
+      >
+        <div class="card-body">
+          <form action="/index" method="post" enctype="multipart/form-data">
+            <input type="file" id="adjuntar" name="clip" />
+            <input type="submit" value="" class="d-none" id="enviarArchivo" />
+          </form>
+        </div>
+        <i class="fas fa-paper-plane px-3" id="btnEnviar"></i>
+      </div>
+
+      <!-- Input-->
+      <div
+        class="justify-self-end align-items-center flex-row d-flex"
+        id="input-area"
+      >
+        <a href="#"
+          ><i
+            class="emogi__icon far fa-smile text-muted px-2"
+            style="font-size: 1.5rem"
+          ></i
+        ></a>
+        <i
+          class="fas fa-paperclip text-muted px-2"
+          style="font-size: 1.5rem; cursor: pointer"
+          id="btnadjuntar"
+        ></i>
+
+        <i
+          onclick="toggleWidget()"
+          class="fas fa-file-alt text-muted px-2 Templates_Button"
+          style="font-size: 1.5rem; cursor: pointer"
+          id="btnadjuntar"
+        ></i>
+
+        <div class="emogis">
+          <div class="equis--emogis">
+            <i class="bx bx-x"></i>
+          </div>
+          <span class="emoji">😀</span>
+          <span class="emoji">😄</span>
+          <span class="emoji">😁</span>
+          <span class="emoji">😂</span>
+          <span class="emoji">🤣</span>
+          <span class="emoji">😊</span>
+          <span class="emoji">😍</span>
+          <span class="emoji">🥰</span>
+          <span class="emoji">🤭</span>
+          <span class="emoji">🤷</span>
+          <span class="emoji">🙋‍♀️</span>
+          <span class="emoji">🙋</span>
+          <span class="emoji">🐨</span>
+          <span class="emoji">🐯</span>
+          <span class="emoji">🌿</span>
+          <span class="emoji">☘</span>
+          <span class="emoji">🍀</span>
+          <span class="emoji">⚡</span>
+          <span class="emoji">🔥</span>
+          <span class="emoji">💥</span>
+          <span class="emoji">⛈</span>
+          <span class="emoji">🌞</span>
+          <span class="emoji">🎄</span>
+          <span class="emoji">💏</span>
+          <span class="emoji">😡</span>
+          <span class="emoji">😔</span>
+          <span class="emoji">🍉</span>
+          <span class="emoji">🍊</span>
+          <span class="emoji">🏉</span>
+          <span class="emoji">🏊‍♂️</span>
+          <span class="emoji">🏄‍♀️</span>
+          <span class="emoji">🎯</span>
+          <span class="emoji">🪑</span>
+          <span class="emoji">👩‍🦯</span>
+          <span class="emoji">🍔</span>
+          <span class="emoji">🍕</span>
+          <span class="emoji">🍟</span>
+          <span class="emoji">🌮</span>
+          <span class="emoji">🍦</span>
+          <span class="emoji">🍩</span>
+          <span class="emoji">🍰</span>
+          <span class="emoji">🍓</span>
+          <span class="emoji">🍌</span>
+          <span class="emoji">🍇</span>
+          <span class="emoji">🍎</span>
+          <span class="emoji">🍒</span>
+          <span class="emoji">🥑</span>
+          <span class="emoji">🍆</span>
+          <span class="emoji">🥦</span>
+          <span class="emoji">🍄</span>
+          <span class="emoji">🥐</span>
+          <span class="emoji">🥨</span>
+          <span class="emoji">🍞</span>
+          <span class="emoji">🥩</span>
+          <span class="emoji">🍗</span>
+          <span class="emoji">🍤</span>
+          <span class="emoji">🍣</span>
+          <span class="emoji">🍚</span>
+          <span class="emoji">🍝</span>
+          <span class="emoji">🍙</span>
+          <span class="emoji">🍛</span>
+          <span class="emoji">🍜</span>
+          <span class="emoji">🍲</span>
+          <span class="emoji">🍢</span>
+          <span class="emoji">🥟</span>
+          <span class="emoji">🍱</span>
+          <span class="emoji">🍠</span>
+          <span class="emoji">🌻</span>
+          <span class="emoji">🌼</span>
+          <span class="emoji">🌸</span>
+          <span class="emoji">🌺</span>
+          <span class="emoji">🌷</span>
+          <span class="emoji">🌹</span>
+          <span class="emoji">🌱</span>
+          <span class="emoji">🌲</span>
+          <span class="emoji">🌳</span>
+          <span class="emoji">🌴</span>
+          <span class="emoji">🌵</span>
+          <span class="emoji">🌾</span>
+          <span class="emoji">🌿</span>
+          <span class="emoji">🍀</span>
+          <span class="emoji">🍁</span>
+          <span class="emoji">🍂</span>
+          <span class="emoji">🍃</span>
+          <span class="emoji">🍇</span>
+          <span class="emoji">🍈</span>
+          <span class="emoji">🍉</span>
+          <span class="emoji">🍊</span>
+          <span class="emoji">🍋</span>
+          <span class="emoji">🍌</span>
+          <span class="emoji">🍍</span>
+          <span class="emoji">🥭</span>
+          <span class="emoji">🍎</span>
+          <span class="emoji">🍏</span>
+          <span class="emoji">🍐</span>
+          <span class="emoji">🍑</span>
+          <span class="emoji">🍒</span>
+          <span class="emoji">🍓</span>
+          <span class="emoji">🥝</span>
+          <span class="emoji">🍅</span>
+          <span class="emoji">🥥</span>
+          <span class="emoji">🥑</span>
+          <span class="emoji">🍆</span>
+          <span class="emoji">🥔</span>
+          <span class="emoji">🥕</span>
+          <span class="emoji">🌽</span>
+          <span class="emoji">🌶</span>
+          <span class="emoji">🥒</span>
+          <span class="emoji">🥦</span>
+          <span class="emoji">🧄</span>
+          <span class="emoji">🧅</span>
+          <span class="emoji">🍄</span>
+          <span class="emoji">🥜</span>
+          <span class="emoji">🌰</span>
+          <span class="emoji">🍞</span>
+          <span class="emoji">🥐</span>
+          <span class="emoji">🥖</span>
+          <span class="emoji">🥨</span>
+          <span class="emoji">🥯</span>
+          <span class="emoji">🧇</span>
+          <span class="emoji">🥞</span>
+          <span class="emoji">🧀</span>
+          <span class="emoji">🍖</span>
+          <span class="emoji">🍗</span>
+          <span class="emoji">🥩</span>
+          <span class="emoji">🥓</span>
+          <span class="emoji">🍔</span>
+          <span class="emoji">🍟</span>
+          <span class="emoji">🍕</span>
+          <span class="emoji">🌭</span>
+          <span class="emoji">🥪</span>
+          <span class="emoji">🌮</span>
+          <span class="emoji">🌯</span>
+          <span class="emoji">🥙</span>
+          <span class="emoji">🧆</span>
+          <span class="emoji">🥚</span>
+          <span class="emoji">🍳</span>
+          <span class="emoji">🥘</span>
+          <span class="emoji">🍲</span>
+          <span class="emoji">🥣</span>
+          <span class="emoji">🥗</span>
+          <span class="emoji">🍿</span>
+          <span class="emoji">🧈</span>
+          <span class="emoji">🧂</span>
+          <span class="emoji">🥫</span>
+          <span class="emoji">🍱</span>
+          <span class="emoji">🍘</span>
+          <span class="emoji">🍙</span>
+          <span class="emoji">🍚</span>
+          <span class="emoji">🍛</span>
+          <span class="emoji">🍜</span>
+          <span class="emoji">🍝</span>
+          <span class="emoji">🍠</span>
+          <span class="emoji">🍢</span>
+          <span class="emoji">🍣</span>
+          <span class="emoji">🍤</span>
+          <span class="emoji">🍥</span>
+          <span class="emoji">🥮</span>
+          <span class="emoji">🍡</span>
+          <span class="emoji">🥟</span>
+          <span class="emoji">🥠</span>
+          <span class="emoji">🥡</span>
+          <span class="emoji">🦪</span>
+          <span class="emoji">🍦</span>
+          <span class="emoji">🍧</span>
+          <span class="emoji">🍨</span>
+          <span class="emoji">🍩</span>
+          <span class="emoji">🍪</span>
+          <span class="emoji">🎂</span>
+          <span class="emoji">🍰</span>
+          <span class="emoji">🧁</span>
+          <span class="emoji">🥧</span>
+          <span class="emoji">🍫</span>
+          <span class="emoji">🍬</span>
+          <span class="emoji">🍭</span>
+          <span class="emoji">🍮</span>
+          <span class="emoji">🍯</span>
+          <span class="emoji">🍼</span>
+          <span class="emoji">🥛</span>
+          <span class="emoji">☕</span>
+          <span class="emoji">🍵</span>
+          <span class="emoji">🍶</span>
+          <span class="emoji">🍾</span>
+          <span class="emoji">🍷</span>
+          <span class="emoji">🍸</span>
+          <span class="emoji">🍹</span>
+          <span class="emoji">🍺</span>
+          <span class="emoji">🍻</span>
+          <span class="emoji">🥂</span>
+          <span class="emoji">🥃</span>
+          <span class="emoji">🍽</span>
+          <span class="emoji">🍴</span>
+          <span class="emoji">🥄</span>
+          <span class="emoji">🔪</span>
+          <span class="emoji">🏺</span>
+          <span class="emoji">🌍</span>
+          <span class="emoji">🌎</span>
+          <span class="emoji">🌏</span>
+          <span class="emoji">🌐</span>
+          <span class="emoji">🗺</span>
+          <span class="emoji">🗾</span>
+          <span class="emoji">🧭</span>
+          <span class="emoji">🏔</span>
+          <span class="emoji">🌋</span>
+          <span class="emoji">🏕</span>
+        </div>
+
+        <script>
+          function cambiarURL() {
+            var mensaje = {
+              action: "changeURL",
+              url: "/config",
+            };
+            window.parent.postMessage(mensaje, "*");
+          }
+        </script>
+
+        <div id="widgetContainer" class="widgetContainer">
+          <div class="widgetContent">
+            <button onclick="cerrarWidget()" class="cerrarWidget">x</button>
+            <h2 class="widgetTitle">Templates</h2>
+            <ul id="templateList" class="WidgetTemplate"></ul>
+          </div>
+        </div>
+
+        <script>
+          // Obtener los templates desde la API de Infobip
+          function obtenerTemplates() {
+            return new Promise(function (resolve, reject) {
+              const xhr = new XMLHttpRequest();
+              xhr.open(
+                "GET",
+                "https://zjj9v6.api.infobip.com/whatsapp/2/senders/573232326930/templates"
+              );
+              xhr.setRequestHeader("Content-Type", "application/json");
+              xhr.setRequestHeader(
+                "Authorization",
+                "Basic TUFHSU5FLkNYOmdDUEouOUhyNDNZaiN2Rw=="
+              );
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    resolve(response.templates);
+                  } else {
+                    reject(xhr.status);
+                  }
+                }
+              };
+              xhr.send();
+            });
+          }
+
+          // Mostrar los templates en el widget
+          function mostrarTemplates(templates) {
+            const templateList = document.getElementById("templateList");
+            templateList.innerHTML = "";
+
+            templates.forEach(function (template) {
+              const listItem = document.createElement("li");
+              listItem.textContent = template.structure.body.text; // Obtener el contenido del mensaje
+              listItem.onclick = function () {
+                copiarTemplate(template.structure.body.text);
+              };
+              templateList.appendChild(listItem);
+            });
+          }
+
+          // Copiar el contenido del template en el input de mensaje
+          function copiarTemplate(content) {
+            const mensajeInput = document.getElementById("input");
+            mensajeInput.value = content || "";
+          }
+
+          // Mostrar u ocultar el widget al hacer clic en el botón
+          function toggleWidget() {
+            const widgetContainer = document.getElementById("widgetContainer");
+            widgetContainer.style.display =
+              widgetContainer.style.display === "block" ? "none" : "block";
+          }
+
+          // Cerrar el widget
+          function cerrarWidget() {
+            const widgetContainer = document.getElementById("widgetContainer");
+            widgetContainer.style.display = "none";
+          }
+
+          // Obtener los templates y mostrarlos al cargar la página
+          obtenerTemplates()
+            .then(function (templates) {
+              console.log("Templates:", templates);
+              mostrarTemplates(templates);
+            })
+            .catch(function (error) {
+              console.log("Error:", error);
+            });
+
+          // Obtener los templates y mostrarlos al cargar la página
+          obtenerTemplates()
+            .then(function (templates) {
+              console.log("Templates:", templates);
+              mostrarTemplates(templates);
+            })
+            .catch(function (error) {
+              console.log("Error:", error);
+            });
+
+          // Obtener los templates y mostrarlos al cargar la página
+          obtenerTemplates()
+            .then(function (templates) {
+              console.log("Templates:", templates);
+              mostrarTemplates(templates);
+            })
+            .catch(function (error) {
+              console.log("Error:", error);
+            });
+        </script>
+
+        <!-- <a href="" class="menu--templates"
+          ><i
+            class="fas fa-file-alt text-muted px-2"
+            style="font-size: 1.2rem; cursor: pointer"
+            id="btnadjuntar"
+          ></i
+        ></a> -->
+
+        <input
+          type="text"
+          name="Message"
+          id="input"
+          placeholder="Type a message"
+          class="flex-grow-1 border-0 px-3 py-2 my-3 rounded shadow-sm"
+        />
+        <div>
+          <i class="fa fa-paper-plane" id="sendd" aria-hidden="true"></i>
+          <i
+            class="fas fa-microphone px-3"
+            id="microphone"
+            onclick="startTime()"
+          ></i>
+        </div>
+        <i
+          class="fas fa-paper-plane text-muted px-3"
+          style="cursor: pointer; display: none"
+          id="enviar"
+          onclick="Enter()"
+        ></i>
+        <p id="message"></p>
+      </div>
+    </div>
+
+    <script>
+      const $messageArea = $("#contentMessage");
+      $messageArea.scrollTop($messageArea.prop("scrollHeight"));
+    </script>
+
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+      integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script
+      type="application/javascript"
+      src="/js/messagesFunctions.js"
+    ></script>
+
+    <script>
+      // Obtener referencia al contenedor de emojis
+      const emojiContainer = document.querySelector(".emogis");
+
+      // Obtener referencia al campo de entrada
+      const emojiInput = document.getElementById("input");
+
+      // Agregar evento clic a los emojis
+      emojiContainer.addEventListener("click", function (event) {
+        // Verificar si se hizo clic en un emoji
+        if (event.target.classList.contains("emoji")) {
+          // Obtener el emoji seleccionado
+          const emoji = event.target.textContent;
+
+          // Escribir el emoji en el campo de entrada
+          emojiInput.value += emoji;
+        }
+      });
+    </script>
+
+    <script>
+      const emogiIcon = document.querySelector(".emogi__icon");
+      const emogisContainer = document.querySelector(".emogis");
+      const closeButton = document.querySelector(".equis--emogis");
+
+      // Agregar evento clic al botón de mostrar emojis
+      emogiIcon.addEventListener("click", function () {
+        emogisContainer.classList.add("show--emogis");
+      });
+
+      // Agregar evento clic al botón de cerrar
+      closeButton.addEventListener("click", function () {
+        emogisContainer.classList.remove("show--emogis");
+      });
+
+      // Agregar evento clic al documento para cerrar si se hace clic fuera del contenedor
+      document.addEventListener("click", function (event) {
+        const target = event.target;
+
+        if (
+          !target.closest(".emogis") &&
+          !target.classList.contains("emogi__icon")
+        ) {
+          emogisContainer.classList.remove("show--emogis");
+        }
+      });
+    </script>
+  </body>
+</html>

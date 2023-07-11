@@ -1,0 +1,68 @@
+<!-- Modal usuarios -->
+<div class="modal fade" id="nuevo" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleAsesores"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="formulario-usuario">
+
+                    <!--Nombre-->
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="aseNombre" placeholder="Nombre">
+                    </div>
+
+                    <!--ID-->
+                    <div class="form-group">
+                        <label for="id">Id Zoho</label>
+                        <input type="text" class="form-control" id="aseIdZoho" placeholder="Id zoho">
+                    </div>
+
+                    <!--Estado-->
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select id="aseEstado" class="selectpicker form-control">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+
+                    <!-- Para la version 3.0 -->
+                    <!-- <div class="form-group">
+                        <label for="asesores">Lineas</label>
+
+                        
+                        <select class="selectpicker form-control" data-live-search="true" multiple>
+                        </select>
+
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer" style="padding-right: 41%;">
+                <button type="submit" class="btn" value="actualizar" id="btnAsesor" style="background-color: #00a884; color:white;"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // <!-- Para la version 3.0 -->
+    // $(document).ready(function() {
+    //   $('.selectpicker').selectpicker({
+    //     liveSearch: true,
+    //     multiple: true,
+    //     selectedTextFormat: 'count > 3',
+    //   });
+    
+    //   // Set selected options programmatically
+    //   $('.selectpicker').val(['option1', 'option2']);
+    //   $('.selectpicker').selectpicker('refresh');
+    // });
+    
+</script>

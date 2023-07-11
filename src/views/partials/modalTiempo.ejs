@@ -1,0 +1,33 @@
+
+<div class="modal fade" id="editar" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-remote="./editar.ejs">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <!-- modal-header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- modal-body -->
+            <div class="modal-body">
+                <form action="/update_hora" method="POST">
+                    <input id="id" name="id" value="<%= dataCierreBot[0].id %>" hidden>
+                    <div class="mb-3">
+                        <label for="inicio" class="form-label">Inicio</label>
+                        <input type="text" class="form-control" id="horas_control"
+                            name="horas_control" tabindex="1"
+                            value="<%= dataCierreBot[0].horas_control %>">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer " style="padding-right: 31%;">
+                <button type="submit" class="btn" style="background-color: #00a884; color:white;">Guardar</button>
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

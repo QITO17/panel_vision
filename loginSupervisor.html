@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #00a884;
+    }
+    
+    .login-container {
+      margin-top: 150px;
+      max-width: 400px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    
+    .login-container h2 {
+      text-align: center;
+      color: #00a884;
+      margin-bottom: 30px;
+    }
+    
+    .login-container .form-control {
+      border-color: #00a884;
+    }
+    
+    .login-container .btn-primary {
+      background-color: #00a884;
+      border-color: #00a884;
+    }
+    
+    .login-container .btn-primary:hover {
+      background-color: #008768;
+      border-color: #008768;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 login-container">
+        <h2>Login</h2>
+        <form>
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

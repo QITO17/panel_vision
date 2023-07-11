@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+    --negro: #303030;
+    --gris-claro: #B9B3AE;
+    --gris-oscuro: #555;
+    --roboto: 'Roboto', sans-serif;
+}
+
+html {
+    font-family: var(--roboto);
+}
+
+#asesoria {
+    font-size: 89%;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: var(--gris-claro);
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gris-oscuro);
+}
+
+#body {
+    overflow: hidden;
+}
+
+#body2 {
+    max-width: 100%;
+    max-height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+h4 {
+    font-size: 400;
+}
+
+/* Message Area */
+.header {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+}
+
+/* Barra principal de los chats */
+.sidebar {
+    flex: 5.9;
+}
+
+/* Contenedor de los mensajes */
+.message-container {
+    flex: 12;
+    height: calc(110vh - 10px);
+}
+
+
+.chat-header-right img {
+    width: 30px;
+    height: 30px;
+    margin: 5px 13px;
+    opacity: 0.9;
+}
+
+/* Tiempo del mensaje */
+.chat-timestamp {
+    font-size: 10px;
+    color: gray;
+}
+
+/* Barra de chat */
+.sidebar-chats {
+    height: calc(92vh - 10px);
+    overflow-y: scroll;
+}
+
+.time p {
+    flex: 1;
+    font-size: 13px;
+    white-space: nowrap;
+    margin-top: -16px;
+    color: gray;
+}
+
+select {
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+
+/* Contenedor de los mensajes */
+
+.message-content {
+    height: calc(87vh - 61px);
+    background-image: url(/images/background.png);
+    background-position: center;
+}
+
+.message-content {
+    /*flex: 1;*/
+    padding: 20px 80px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/****************message area *******/
+
+.chat-list-item.unread .name,
+.chat-list-item.unread .last-message {
+	font-weight: bold;
+}
+
+.chat-list-item .last-message,
+#message-area #navbar #details {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#navbar {
+	background: #EDEDED
+}
+
+
+#input-area {
+	background: hsl(0, 0%, 95%);
+}
+
+#input-area #input {
+	outline: none;
+}
+
+#messages {
+	flex: 1!important;
+	/*background: hsl(0, 0%, 80%);*/
+	overflow: auto;
+}
+
+.message-item {
+	position:relative;
+	max-width: 75%;
+	word-break: break-word;
+}
+.message-item.self {
+	background: #dcf8c6!important;
+}
+.message-item .number {
+	color: #1f7aec !important;
+}
+.message-item .options {
+	position: absolute;
+	top: 0;
+	right: -3px;
+	opacity: 0;
+	transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+}
+.message-item:hover .options {
+	opacity: 1;
+	right: 0;
+}
+
+.chat-list-item {
+    background: white;
+    cursor: pointer;
+}
+
+.chat-list-item:hover {
+    background: hsl(0, 0%, 95%);
+}
+
+.chat-list-item:active {
+    background: hsl(0, 0%, 85%);
+}
+
+.chat-list-item.active {
+    background: hsl(0, 0%, 90%);
+}
+
+/* chat footer */
+
+#microphone {
+    cursor: pointer; 
+    font-size: 1.3rem;
+    color: #6c757d!important;
+}
+
+#microphone::hover {
+    background-color: #6c757d;
+    color: #fff;
+}

@@ -1,0 +1,140 @@
+<div class="modal fade" id="plantilla" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Plantilla</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  class="row">
+                    <!--Nombre-->
+                    <div class="form-group pb-1 col-12">
+                        <label for="name">Nombre de la plantilla</label>
+                        <input required type="text" class="form-control form-control-sm" id="nombrePlantilla" placeholder="Nombre">
+                    </div>
+                    <!-- Segunda mitad del model -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <!-- Contenido para la primera mitad -->
+                                <div class="pb-2 ">
+                                    <label for="id">Categoria</label>
+                                    <select id="tipoCategoria" class="form-control" onchange="selectOption()">
+                                        <option value="MARKETING">Mercadeo</option>
+                                        <option value="UTILITY">Utilidad</option>
+                                        <option value="AUTHENTICATION">Autenticación</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="pb-4">
+                                    <label for="estado">Texto Plantilla</label>
+                                    <textarea id="miTextarea" rows="4" cols="50"></textarea>
+                                    </select>
+                                </div>
+                                <!-- <div class="form-floating">
+                                    <textarea class="form-control" id="floatingTextarea2"
+                                        style="height: 100px"></textarea>
+                                    <label for="floatingTextarea2" id="mensaje">Mensaje Plantilla</label>
+                                    <div class="mb-3 d-none" id="file">
+                                        <input required class="form-control form-control-sm" id="formFileSm" type="file">
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="col-6">
+                                <!-- Contenido para la segunda mitad -->
+                                
+
+                                <div class="form-group">
+                                    <label for="name">Idioma</label>
+                                    <select id="language">
+                                        <option value="af">Afrikáans</option>
+                                        <option value="sq">Albanés</option>
+                                        <option value="ar">Árabe</option>
+                                        <option value="az">Azerbaiyano</option>
+                                        <option value="bn">Bengalí</option>
+                                        <option value="bg">Búlgaro</option>
+                                        <option value="ca">Catalán</option>
+                                        <option value="zh_CN">Chino (Simplificado)</option>
+                                        <option value="zh_HK">Chino (Hong Kong)</option>
+                                        <option value="zh_TW">Chino (Taiwán)</option>
+                                        <option value="hr">Croata</option>
+                                        <option value="cs">Checo</option>
+                                        <option value="da">Danés</option>
+                                        <option value="nl">Holandés</option>
+                                        <option value="en">Inglés</option>
+                                        <option value="en_GB">Inglés (Reino Unido)</option>
+                                        <option value="en_US">Inglés (Estados Unidos)</option>
+                                        <option value="et">Estonio</option>
+                                        <option value="fil">Filipino</option>
+                                        <option value="fi">Finlandés</option>
+                                        <option value="fr">Francés</option>
+                                        <option value="ka">Georgiano</option>
+                                        <option value="de">Alemán</option>
+                                        <option value="el"> Griego</option>
+                                        <option value="gu">Gujarati</option>
+                                        <option value="ha">Hausa</option>
+                                        <option value="he">Hebreo</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="hu">Húngaro</option>
+                                        <option value="id">Indonesio</option>
+                                        <option value="ga">Irlandés</option>
+                                        <option value="it">Italiano</option>
+                                        <option value="ja">Japonés</option>
+                                        <option value="kn">Kannada</option>
+                                        <option value="kk">Kazajo</option>
+                                        <option value="rw_RW">Kinyarwanda</option>
+                                        <option value="ko">Coreano</option>
+                                        <option value="ky_KG">Kirguís</option>
+                                        <option value="lo">Lao</option>
+                                        <option value="lv">Letón</option>
+                                        <option value="lt">Lituano</option>
+                                        <option value="mk">Macedonio</option>
+                                        <option value="ms">Malayo</option>
+                                        <option value="ml">Malayalam</option>
+                                        <option value="mr">Marathi</option>
+                                        <option value="nb">Noruego (Bokmål)</option>
+                                        <option value="fa">Persa</option>
+                                        <option value="pl">Polaco</option>
+                                        <option value="pt_BR">Portugués (Brasil)</option>
+                                        <option value="pt_PT">Portugués (Portugal)</option>
+                                        <option value="pa">Punjabi</option>
+                                        <option value="ro">Rumano</option>
+                                        <option value="ru">Ruso</option>
+                                        <option value="sr">Serbio</option>
+                                        <option value="sk">Eslovaco</option>
+                                        <option value="sl">Esloveno</option>
+                                        <option value="es">Español</option>
+                                        <option value="es_AR">Español (Argentina)</option>
+                                        <option value="es_ES">Español (España)</option>
+                                        <option value="es_MX">Español (México)</option>
+                                        <option value="sw">Suajili</option>
+                                        <option value="sv">Sueco</option>
+                                        <option value="ta">Tamil</option>
+                                        <option value="te">Telugu</option>
+                                        <option value="th">Tailandés</option>
+                                        <option value="tr">Turco</option>
+                                        <option value="uk">Ucraniano</option>
+                                        <option value="ur">Urdu</option>
+                                        <option value="uz">Uzbeko</option>
+                                        <option value="vi">Vietnamita</option>
+                                        <option value="zu">Zulú</option>
+                                        <option value="desconocido">Desconocido</option>
+                                      </select>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="padding-right: 41%;">
+                <button onclick="crearTemplate()"  class="btn" value="actualizar" style="background-color: #00a884; color:white;">Crear</button>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<!--
+ Copyright 2022 desar
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/main.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://live.zwidgets.com/js-sdk/1.0.5/ZohoEmbededAppSDK.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-***" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="./dist/css/bootstrap-msg.css" />
+  <link rel="stylesheet" type="text/css" href="./css/var.css" />
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Variable de tiempo</title>
+</head>
+
+<body >
+  <%- include('./partials/header.ejs') %> 
+  <!--<nav>
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" href="/index">Principal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/info">Historial</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/configuracion">Configuracion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/variables">Variables</a>
+      </li>
+      </ul>-->
+  </nav>
+  <div class="card">
+    <!--<div class="card-header">Historial</div>-->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="panel" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Tiempo para cierre del chat</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody id="tb">
+            <% results.forEach((wpp)=>{ %>
+              <tr>
+                <td>
+                  <%= wpp.horas_control %>
+                </td>
+                <td>
+                  <a href="/editar/<%= wpp.id %>" class="btn btn-outline-info">editar</a>
+                </td>
+              </tr>
+          </tbody>
+          <% }) %>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+<script src="/public/controlzoho2.js"></script>
+<script type='text/javascript' src="/chat2.js" charset="utf-8"></script>
+<script type='text/javascript' src="/js/bootstrap.js" charset="utf-8"></script>
+<script type="text/javascript" src="./dist/js/bootstrap-msg.js"></script>
